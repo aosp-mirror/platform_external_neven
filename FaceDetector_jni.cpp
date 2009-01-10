@@ -23,7 +23,7 @@
 #include <utils/String8.h>
 #include <utils/Log.h>
 
-#include <graphics/SkBitmap.h>
+#include <core/SkBitmap.h>
 
 #include "jni.h"
 #include "JNIHelp.h"
