@@ -118,8 +118,7 @@ LOCAL_SHARED_LIBRARIES := \
 	libandroid_runtime \
 	libnativehelper \
 	libutils \
-	libcorecg \
-	libsgl \
+	libskia \
 	libcutils
 
 LOCAL_MODULE:= libFFTEm
