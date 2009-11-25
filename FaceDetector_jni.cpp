@@ -243,6 +243,8 @@ detect(JNIEnv *_env, jobject _this,
     int numberOfFaces = 0;
     if (btk_FaceFinder_putDCR(hfd, hdcr) == btk_STATUS_OK) {
         numberOfFaces = btk_FaceFinder_faces(hfd);
+    } else {
+        LOGE("ERROR: Return 0 faces because error exists in btk_FaceFinder_putDCR.\n");
     }
 
     // release the arrays we're using
