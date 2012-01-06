@@ -244,7 +244,7 @@ detect(JNIEnv *_env, jobject _this,
     if (btk_FaceFinder_putDCR(hfd, hdcr) == btk_STATUS_OK) {
         numberOfFaces = btk_FaceFinder_faces(hfd);
     } else {
-        LOGE("ERROR: Return 0 faces because error exists in btk_FaceFinder_putDCR.\n");
+        ALOGE("ERROR: Return 0 faces because error exists in btk_FaceFinder_putDCR.\n");
     }
 
     // release the arrays we're using
@@ -300,13 +300,13 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved)
     jint result = -1;
 
     if (vm->GetEnv((void**) &env, JNI_VERSION_1_4) != JNI_OK) {
-        LOGE("ERROR: GetEnv failed\n");
+        ALOGE("ERROR: GetEnv failed\n");
         goto bail;
     }
     assert(env != NULL);
 
     if (register_android_media_FaceDetector(env) < 0) {
-        LOGE("ERROR: MediaPlayer native registration failed\n");
+        ALOGE("ERROR: MediaPlayer native registration failed\n");
         goto bail;
     }
 
