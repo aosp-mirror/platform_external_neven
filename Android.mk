@@ -118,6 +118,7 @@ LOCAL_SHARED_LIBRARIES := \
 	libandroid_runtime \
 	libnativehelper \
 	libutils \
+	liblog \
 	libskia \
 	libcutils
 
