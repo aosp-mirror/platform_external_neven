@@ -95,9 +95,9 @@ static void
 nativeClassInit
 (JNIEnv *_env, jclass _this)
 {
-    gFaceDetectorOffsets.fd             = _env->GetFieldID(_this, "mFD", "I");
-    gFaceDetectorOffsets.sdk            = _env->GetFieldID(_this, "mSDK", "I");
-    gFaceDetectorOffsets.dcr            = _env->GetFieldID(_this, "mDCR", "I");
+    gFaceDetectorOffsets.fd             = _env->GetFieldID(_this, "mFD", "J");
+    gFaceDetectorOffsets.sdk            = _env->GetFieldID(_this, "mSDK", "J");
+    gFaceDetectorOffsets.dcr            = _env->GetFieldID(_this, "mDCR", "J");
     gFaceDetectorOffsets.width          = _env->GetFieldID(_this, "mWidth", "I");
     gFaceDetectorOffsets.height         = _env->GetFieldID(_this, "mHeight", "I");
     gFaceDetectorOffsets.maxFaces       = _env->GetFieldID(_this, "mMaxFaces", "I");
@@ -113,7 +113,7 @@ nativeClassInit
     gFaceOffsets.eulerz      = _env->GetFieldID(faceClass, "mPoseEulerZ", "F");
 
     jclass bitmapClass = _env->FindClass("android/graphics/Bitmap");
-    nativeBitmapID = _env->GetFieldID(bitmapClass, "mNativeBitmap", "I");
+    nativeBitmapID = _env->GetFieldID(bitmapClass, "mNativeBitmap", "J");
 }
 
 // ---------------------------------------------------------------------------
@@ -173,9 +173,9 @@ initialize(JNIEnv *_env, jobject _this,
     free(initData);
 
     // initialize the java object
-    _env->SetIntField(_this, gFaceDetectorOffsets.fd,  (jint)fd);
-    _env->SetIntField(_this, gFaceDetectorOffsets.sdk, (jint)sdk);
-    _env->SetIntField(_this, gFaceDetectorOffsets.dcr, (jint)dcr);
+    _env->SetLongField(_this, gFaceDetectorOffsets.fd,  (jlong)fd);
+    _env->SetLongField(_this, gFaceDetectorOffsets.sdk, (jlong)sdk);
+    _env->SetLongField(_this, gFaceDetectorOffsets.dcr, (jlong)dcr);
 
     return 1;
 }
@@ -184,13 +184,13 @@ static void
 destroy(JNIEnv *_env, jobject _this)
 {
     btk_HFaceFinder hfd =
-        (btk_HFaceFinder)(_env->GetIntField(_this, gFaceDetectorOffsets.fd));
+        (btk_HFaceFinder)(_env->GetLongField(_this, gFaceDetectorOffsets.fd));
     btk_FaceFinder_close( hfd );
 
-    btk_HDCR hdcr = (btk_HDCR)(_env->GetIntField(_this, gFaceDetectorOffsets.dcr));
+    btk_HDCR hdcr = (btk_HDCR)(_env->GetLongField(_this, gFaceDetectorOffsets.dcr));
     btk_DCR_close( hdcr );
 
-    btk_HSDK hsdk = (btk_HSDK)(_env->GetIntField(_this, gFaceDetectorOffsets.sdk));
+    btk_HSDK hsdk = (btk_HSDK)(_env->GetLongField(_this, gFaceDetectorOffsets.sdk));
     btk_SDK_close( hsdk );
 }
 
@@ -199,9 +199,9 @@ detect(JNIEnv *_env, jobject _this,
      jobject bitmap)
 {
     // get the fields we need
-    btk_HDCR hdcr = (btk_HDCR)(_env->GetIntField(_this, gFaceDetectorOffsets.dcr));
+    btk_HDCR hdcr = (btk_HDCR)(_env->GetLongField(_this, gFaceDetectorOffsets.dcr));
     btk_HFaceFinder hfd =
-        (btk_HFaceFinder)(_env->GetIntField(_this, gFaceDetectorOffsets.fd));
+        (btk_HFaceFinder)(_env->GetLongField(_this, gFaceDetectorOffsets.fd));
     u32 maxFaces = _env->GetIntField(_this, gFaceDetectorOffsets.maxFaces);
     u32 width = _env->GetIntField(_this, gFaceDetectorOffsets.width);
     u32 height = _env->GetIntField(_this, gFaceDetectorOffsets.height);
@@ -211,7 +211,7 @@ detect(JNIEnv *_env, jobject _this,
 
     // get to the native bitmap
     SkBitmap const * nativeBitmap =
-            (SkBitmap const *)_env->GetIntField(bitmap, nativeBitmapID);
+            (SkBitmap const *)_env->GetLongField(bitmap, nativeBitmapID);
 
     // get to our BW temporary buffer
     jbyte* bwbuffer = _env->GetByteArrayElements(bwbufferObject, 0);
@@ -256,9 +256,9 @@ static void
 get_face(JNIEnv *_env, jobject _this,
      jobject face, jint index)
 {
-    btk_HDCR hdcr = (btk_HDCR)(_env->GetIntField(_this, gFaceDetectorOffsets.dcr));
+    btk_HDCR hdcr = (btk_HDCR)(_env->GetLongField(_this, gFaceDetectorOffsets.dcr));
     btk_HFaceFinder hfd =
-        (btk_HFaceFinder)(_env->GetIntField(_this, gFaceDetectorOffsets.fd));
+        (btk_HFaceFinder)(_env->GetLongField(_this, gFaceDetectorOffsets.fd));
 
     FaceData faceData;
     btk_FaceFinder_getDCR(hfd, hdcr);
