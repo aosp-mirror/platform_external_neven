@@ -108,7 +108,6 @@ LOCAL_CFLAGS += -Depl_LINUX
 LOCAL_C_INCLUDES += \
 	external/neven/FaceRecEm/common/src/b_FDSDK \
 	$(JNI_H_INCLUDE) \
-	$(call include-path-for, corecg graphics) \
 	$(LOCAL_PATH)/FaceRecEm/common/src \
 	$(LOCAL_PATH)/Embedded/common/conf \
 	$(LOCAL_PATH)/Embedded/common/src \
