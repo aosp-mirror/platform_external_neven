@@ -114,7 +114,6 @@ LOCAL_C_INCLUDES += \
 	$(LOCAL_PATH)/unix/src
 
 LOCAL_SHARED_LIBRARIES := \
-	libandroid_runtime \
 	libnativehelper \
 	libutils \
 	liblog \
