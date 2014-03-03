@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+#include <assert.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <fcntl.h>
@@ -27,7 +28,6 @@
 
 #include "jni.h"
 #include "JNIHelp.h"
-#include "android_runtime/AndroidRuntime.h"
 
 using namespace android;
 
@@ -288,8 +288,7 @@ static JNINativeMethod methods[] = {
 
 int register_android_media_FaceDetector(JNIEnv *_env)
 {
-    return android::AndroidRuntime::registerNativeMethods(
-            _env, classPathName, methods, NELEM(methods));
+    return jniRegisterNativeMethods(_env, classPathName, methods, NELEM(methods));
 }
 
 // ---------------------------------------------------------------------------
