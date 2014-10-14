@@ -254,7 +254,7 @@ detect(JNIEnv *_env, jobject _this,
 
 static void
 get_face(JNIEnv *_env, jobject _this,
-     jobject face, jint index)
+     jobject face, jint)
 {
     btk_HDCR hdcr = (btk_HDCR)(_env->GetLongField(_this, gFaceDetectorOffsets.dcr));
     btk_HFaceFinder hfd =
@@ -293,7 +293,7 @@ int register_android_media_FaceDetector(JNIEnv *_env)
 
 // ---------------------------------------------------------------------------
 
-jint JNI_OnLoad(JavaVM* vm, void* reserved)
+jint JNI_OnLoad(JavaVM* vm, void*)
 {
     JNIEnv* env = NULL;
     jint result = -1;
