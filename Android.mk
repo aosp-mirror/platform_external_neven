@@ -103,7 +103,7 @@ LOCAL_SRC_FILES:= \
        FaceRecEm/common/src/b_FDSDK/SDK.c
 ##
 
-LOCAL_CFLAGS += -Depl_LINUX
+LOCAL_CFLAGS += -Depl_LINUX -Wno-unused-parameter
 
 LOCAL_C_INCLUDES += \
 	external/neven/FaceRecEm/common/src/b_FDSDK \
