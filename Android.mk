@@ -106,7 +106,7 @@ LOCAL_SRC_FILES:= \
 LOCAL_CFLAGS += -Depl_LINUX -Wno-unused-parameter
 
 LOCAL_C_INCLUDES += \
-	external/neven/FaceRecEm/common/src/b_FDSDK \
+	$(LOCAL_PATH)/FaceRecEm/common/src/b_FDSDK \
 	$(JNI_H_INCLUDE) \
 	$(LOCAL_PATH)/FaceRecEm/common/src \
 	$(LOCAL_PATH)/Embedded/common/conf \
@@ -122,13 +122,20 @@ LOCAL_SHARED_LIBRARIES := \
 
 LOCAL_MODULE:= libFFTEm
 
-ALL_PREBUILT += $(TARGET_OUT)/usr/share/bmd/RFFspeed_501.bmd
-$(TARGET_OUT)/usr/share/bmd/RFFspeed_501.bmd : $(LOCAL_PATH)/Embedded/common/data/APIEm/Modules/RFFspeed_501.bmd | $(ACP)
-	$(transform-prebuilt-to-target)
-
-ALL_PREBUILT += $(TARGET_OUT)/usr/share/bmd/RFFstd_501.bmd
-$(TARGET_OUT)/usr/share/bmd/RFFstd_501.bmd : $(LOCAL_PATH)/Embedded/common/data/APIEm/Modules/RFFstd_501.bmd | $(ACP)
-	$(transform-prebuilt-to-target)
-
+LOCAL_REQUIRED_MODULES := RFFspeed_501.bmd RFFstd_501.bmd
 
 include $(BUILD_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := RFFspeed_501.bmd
+LOCAL_MODULE_CLASS := etc
+LOCAL_MODULE_PATH := $(TARGET_OUT)/usr/share/bmd
+LOCAL_SRC_FILES := Embedded/common/data/APIEm/Modules/RFFspeed_501.bmd
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := RFFstd_501.bmd
+LOCAL_MODULE_CLASS := etc
+LOCAL_MODULE_PATH := $(TARGET_OUT)/usr/share/bmd
+LOCAL_SRC_FILES := Embedded/common/data/APIEm/Modules/RFFstd_501.bmd
+include $(BUILD_PREBUILT)
