@@ -111,6 +111,8 @@ cc_library_shared {
         "-Wno-unused-parameter",
     ],
 
+    header_libs: ["jni_headers"],
+
     local_include_dirs: [
         "FaceRecEm/common/src/b_FDSDK",
         "FaceRecEm/common/src",
