@@ -125,7 +125,7 @@ initialize(JNIEnv *_env, jobject _this,
 
     const int MAX_FILE_SIZE = 65536;
     void* initData = malloc( MAX_FILE_SIZE ); /* enough to fit entire file */
-    int filedesc = open(path.string(), O_RDONLY);
+    int filedesc = open(path.c_str(), O_RDONLY);
     int initDataSize = read(filedesc, initData, MAX_FILE_SIZE);
     close(filedesc);
 
