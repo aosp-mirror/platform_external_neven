@@ -15,6 +15,7 @@
  */
 
 #include <assert.h>
+#include <filesystem>
 #include <stdlib.h>
 #include <stdio.h>
 #include <fcntl.h>
@@ -119,13 +120,13 @@ initialize(JNIEnv *_env, jobject _this,
 {
     // load the configuration file
     const char* root = getenv("ANDROID_ROOT");
-    String8 path(root);
-    path.appendPath("usr/share/bmd/RFFstd_501.bmd");
-    // path.appendPath("usr/share/bmd/RFFspeed_501.bmd");
+    std::filesystem::path path(root);
+    path /= "usr/share/bmd/RFFstd_501.bmd";
+    // path /= "usr/share/bmd/RFFspeed_501.bmd";
 
     const int MAX_FILE_SIZE = 65536;
     void* initData = malloc( MAX_FILE_SIZE ); /* enough to fit entire file */
-    int filedesc = open(path.string(), O_RDONLY);
+    int filedesc = open(path.c_str(), O_RDONLY);
     int initDataSize = read(filedesc, initData, MAX_FILE_SIZE);
     close(filedesc);
 
