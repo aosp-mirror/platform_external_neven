@@ -145,10 +145,6 @@ cc_library_shared {
         "libcutils",
     ],
 
-    whole_static_libs: [
-        "libc++fs",
-    ],
-
     required: [
         "RFFspeed_501.bmd",
         "RFFstd_501.bmd",
